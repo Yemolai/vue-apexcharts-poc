@@ -1,4 +1,6 @@
-# apex-vue-poc
+# VueApexCharts PoC
+
+This project is just a proof-of-concept to demonstrate VueApexCharts Usage.
 
 ## Project setup
 ```
