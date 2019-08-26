@@ -3,18 +3,26 @@
     <h3>ApexCharts</h3>
     <input type="number" v-model="strSeries">
     <input type="number" v-model="strLength">
-    <basic-bar-chart width="50%" :x-axis="{ years }" :data="chartData" />
+    <div style="display: flex; flex-direction: row;">
+      <div style="width: 50%">
+        <basic-bar-chart :x-axis="{ years }" :data="chartData" />
+      </div>
+      <div style="width: 50%">
+        <basic-line-chart :x-axis="{ years }" :data="chartData" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import BasicBarChart from './BasicBarChart'
+import BasicLineChart from './BasicLineChart'
 
 const years = new Array(12).fill(0).map((_, idx, a) => Number(new Date().getFullYear()) - a.length + idx)
 
 export default {
   name: 'HelloWorld',
-  components: { BasicBarChart },
+  components: { BasicBarChart, BasicLineChart },
   props: {
     msg: String
   },
@@ -48,7 +56,7 @@ export default {
       const data = new Array(this.series).fill(1).reduce((a, _, k) => {
         const newData = new Array(this.length)
           .fill(0)
-          .map((_, idx) => Number(((Math.random() * 2) + idx).toFixed(1)))
+          .map((_, idx) => Number(((Math.random() * idx) + 1).toFixed(1)))
         return { ...a, [`DataSet ${k + 1}`]: newData }
       }, {})
       return data
