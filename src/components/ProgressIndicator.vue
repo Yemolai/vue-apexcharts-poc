@@ -43,6 +43,14 @@ export default {
       type: Number,
       default: 0
     },
+    backgroundColor: {
+      type: String,
+      default: '#e7e7e7'
+    },
+    foregroundColor: {
+      type: String,
+      default: '#007bd9'
+    },
     nameColor: String,
     valueColor: String,
     textColor: String,
@@ -50,6 +58,7 @@ export default {
   },
   computed: {
     chartOptions () {
+      const { foregroundColor, backgroundColor } = this
       const starts = { left: -90, top: 0, right: 90, bottom: 180 }
       const startAngle = starts[this.startAt]
       const endAngle = startAngle + (this.mode === 'full' ? 360 : 180)
@@ -59,7 +68,7 @@ export default {
             startAngle,
             endAngle,
             track: {
-              background: '#e7e7e7',
+              background: backgroundColor,
               strokeWidth: '97%',
               margin: 5, // margin is in pixels
               shadow: {
@@ -76,6 +85,7 @@ export default {
                 show: false
               },
               value: {
+                color: foregroundColor,
                 offsetY: 10,
                 fontSize: '1.4em',
                 formatter: () => `${this.value.toLocaleString()}%`
