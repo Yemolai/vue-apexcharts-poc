@@ -2,6 +2,8 @@
 
 This project is just a proof-of-concept to demonstrate VueApexCharts Usage.
 
+A live example can be found at [vue-apex-poc.yemolai.surge.sh](http://vue-apex-poc.yemolai.surge.sh).
+
 ## Project setup
 ```
 npm install
