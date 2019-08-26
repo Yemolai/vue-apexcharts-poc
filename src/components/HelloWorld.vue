@@ -1,9 +1,24 @@
 <template>
   <div class="hello">
     <h3>ApexCharts</h3>
+    <input type="number" v-model="strProgress">
     <input type="number" v-model="strSeries">
     <input type="number" v-model="strLength">
-    <div style="display: flex; flex-direction: row;">
+    <div class="row">
+      <div style="width: 33.3%">
+        <progress-indicator
+          name="Indicator"
+          :value="progress || 0"
+          width="60%"
+          start-at="top"/>
+      </div>
+      <div style="width: 50%"></div>
+    </div>
+    <div class="row">
+      <div style="width: 50%"></div>
+      <div style="width: 50%"></div>
+    </div>
+    <div class="row">
       <div style="width: 50%">
         <basic-bar-chart :x-axis="{ years }" :data="chartData" />
       </div>
@@ -17,21 +32,34 @@
 <script>
 import BasicBarChart from './BasicBarChart'
 import BasicLineChart from './BasicLineChart'
+import ProgressIndicator from './ProgressIndicator'
 
 const years = new Array(12).fill(0).map((_, idx, a) => Number(new Date().getFullYear()) - a.length + idx)
 
 export default {
   name: 'HelloWorld',
-  components: { BasicBarChart, BasicLineChart },
+  components: { BasicBarChart, BasicLineChart, ProgressIndicator },
   props: {
     msg: String
   },
   data: () => ({
     years,
+    progress: 95.64,
     series: 1,
     length: 5
   }),
   computed: {
+    strProgress: {
+      get () {
+        return `${this.progress}`
+      },
+      set (val) {
+        const v = Number(val)
+        if (!isNaN(v)) {
+          this.progress = v < 0 ? 0 : v > 100 ? 100 : v
+        }
+      }
+    },
     strLength: {
       get () {
         return `${this.length}`
@@ -80,5 +108,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.row {
+  display: flex;
+  flex-direction: row;
 }
 </style>
