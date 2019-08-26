@@ -1,13 +1,9 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
     <h3>ApexCharts</h3>
-    <basic-bar-chart :x-axis="{ years }" :data="chartData" />
+    <input type="number" v-model="strSeries">
+    <input type="number" v-model="strLength">
+    <basic-bar-chart width="50%" :x-axis="{ years }" :data="chartData" />
   </div>
 </template>
 
@@ -24,21 +20,37 @@ export default {
   },
   data: () => ({
     years,
-    series: 2,
-    length: 12
+    series: 1,
+    length: 5
   }),
   computed: {
+    strLength: {
+      get () {
+        return `${this.length}`
+      },
+      set (val) {
+        this.length = Number(val)
+      }
+    },
+    strSeries: {
+      get () {
+        return `${this.series}`
+      },
+      set (val) {
+        this.series = Number(val)
+      }
+    },
     xData () {
       const y = new Date().getFullYear()
       return new Array(this.length).fill(0).map((_, idx, a) => Number(y) - a.length + idx)
     },
     chartData () {
-      const len = this.years.length
-      const data = new Array(this.series).fill(0).reduce((a, c) => {
-        const newData = new Array(len).fill(0)
-          .map((_, idx) => Number(((Math.random() * 2) + idx).toFixed(2)))
-        return { ...a, [`DataSet ${c + 1}`]: newData }
-      })
+      const data = new Array(this.series).fill(1).reduce((a, _, k) => {
+        const newData = new Array(this.length)
+          .fill(0)
+          .map((_, idx) => Number(((Math.random() * 2) + idx).toFixed(1)))
+        return { ...a, [`DataSet ${k + 1}`]: newData }
+      }, {})
       return data
     }
   }
