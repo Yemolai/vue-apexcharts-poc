@@ -9,8 +9,8 @@ export default {
   components: { ApexChart },
   props: {
     width: {
-      type: Number,
-      default: 500
+      type: String || Number,
+      default: '100%'
     },
     options: {
       type: Object,
