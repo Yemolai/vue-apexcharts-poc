@@ -12,7 +12,12 @@
           width="60%"
           start-at="top"/>
       </div>
-      <div style="width: 50%"></div>
+      <div style="width: 33.3%">
+        <area-chart :data="chartData" />
+      </div>
+      <div style="width: 33.3%">
+        <stacked-col-chart :data="chartData" percentage />
+      </div>
     </div>
     <div class="row">
       <div style="width: 50%"></div>
@@ -33,12 +38,20 @@
 import BasicBarChart from './BasicBarChart'
 import BasicLineChart from './BasicLineChart'
 import ProgressIndicator from './ProgressIndicator'
+import AreaChart from './AreaChart'
+import StackedColChart from './StackedColChart'
 
 const years = new Array(12).fill(0).map((_, idx, a) => Number(new Date().getFullYear()) - a.length + idx)
 
 export default {
   name: 'HelloWorld',
-  components: { BasicBarChart, BasicLineChart, ProgressIndicator },
+  components: {
+    BasicBarChart,
+    BasicLineChart,
+    AreaChart,
+    ProgressIndicator,
+    StackedColChart
+  },
   props: {
     msg: String
   },

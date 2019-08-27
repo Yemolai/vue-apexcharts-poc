@@ -1,9 +1,15 @@
 <template>
-  <apex-chart :width="width" type="bar" :options="chartOptions" :series="chartSeries"/>
+  <apex-chart
+    type="bar"
+    :width="width"
+    :options="chartOptions"
+    :series="chartSeries"
+  />
 </template>
 
 <script>
 import ApexChart from 'vue-apexcharts'
+
 export default {
   name: 'BasicBarChart',
   components: { ApexChart },
@@ -37,7 +43,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
